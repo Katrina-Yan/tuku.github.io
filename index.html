@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>金陵织鸭·样式库</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f8f5f0;
+            font-family: "思源宋体", "宋体", serif;
+            color: #5c4b3e;
+            padding: 20px 0;
+        }
+
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            border-bottom: 1px solid #d9cbb8;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 36px;
+            font-weight: normal;
+            letter-spacing: 6px;
+            color: #3a2e23;
+            margin-bottom: 12px;
+        }
+
+        .header p {
+            font-size: 16px;
+            color: #8c7b6b;
+            letter-spacing: 2px;
+        }
+
+        /* 一级分类按钮 */
+        .category-bar {
+            text-align: center;
+            margin: 20px 0 40px;
+        }
+        .category-bar button {
+            padding: 10px 25px;
+            margin: 0 10px;
+            font-size: 16px;
+            border: 1px solid #d9cbb8;
+            background: #fff;
+            border-radius: 30px;
+            cursor: pointer;
+            font-family: "宋体", serif;
+            transition: 0.3s;
+        }
+        .category-bar button.active {
+            background: #3a2e23;
+            color: #fff;
+        }
+
+        /* 图片大区域 */
+        .gallery-section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: none;
+        }
+        .gallery-section.show {
+            display: block;
+        }
+
+        /* 板块标题 */
+        .section-title {
+            font-size: 22px;
+            margin: 40px 0 20px;
+            color: #3a2e23;
+            border-left: 4px solid #d9cbb8;
+            padding-left: 12px;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 25px;
+            margin-bottom: 20px;
+        }
+
+        .pic-card {
+            background: #fff;
+            padding: 12px;
+            border-radius: 8px;
+            box-shadow: 0 3px 12px rgba(92,75,62,0.15);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .pic-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 8px 20px rgba(92,75,62,0.25);
+        }
+        .pic-card img {
+            width: 100%;
+            height: auto;
+            max-height: 280px;
+            object-fit: contain;
+            border-radius: 4px;
+            display: block;
+        }
+        .pic-name {
+            text-align: center;
+            margin-top: 12px;
+            font-size: 15px;
+            color: #6b5a4c;
+        }
+
+        /* 灯箱 */
+        .lightbox {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.92);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            padding: 30px;
+        }
+        .lightbox-img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 6px;
+        }
+        .close-btn {
+            position: absolute;
+            top: 30px; right: 40px;
+            font-size: 45px;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .footer {
+            text-align: center;
+            margin: 60px 0 30px;
+            font-size: 14px;
+            color: #a08f7f;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>金陵织鸭·样式库</h1>
+        <p>IP形象 | 商品样式 样式集</p>
+    </div>
+
+    <!-- 一级分类 -->
+    <div class="category-bar">
+        <button id="btnIp" class="active" onclick="showMain('ip')">IP形象</button>
+        <button id="btnGoods" onclick="showMain('goods')">商品样式</button>
+    </div>
+
+    <!-- IP形象区域 -->
+    <div id="ipSection" class="gallery-section show">
+        <h2 class="section-title">IP形象</h2>
+        <div class="gallery">
+            <div class="pic-card" onclick="openLightbox(this)">
+                <img src="pictures/ip1.jpg" alt="IP形象">
+                <div class="pic-name">关公鸭</div>
+            </div>
+            <div class="pic-card" onclick="openLightbox(this)">
+                <img src="pictures/ip2.jpg" alt="IP形象">
+                <div class="pic-name">织鸭</div>
+            </div>
+            <div class="pic-card" onclick="openLightbox(this)">
+                <img src="pictures/ip3.jpg" alt="IP形象">
+                <div class="pic-name">云锦鸭</div>
+            </div>
+            <div class="pic-card" onclick="openLightbox(this)">
+                <img src="pictures/ip4.jpg" alt="IP形象">
+                <div class="pic-name">妈祖鸭</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 商品样式区域：直接平铺 抱枕 / 四件套 / 其他 -->
+    <div id="goodsSection" class="gallery-section">
+        <h2 class="section-title">抱枕</h2>
+        <div class="gallery">
+            <div class="pic-card" onclick="openLightbox(this)">
+                <img src="pictures/bao1.jpg" alt="抱枕">
+                <div class="pic-name">紫色</div>
+            </div>
+            <div class="pic-card" onclick="openLightbox(this)">
+                <img src="pictures/bao2.jpg" alt="抱枕">
+                <div class="pic-name">绿色</div>
+            </div>
+            <div class="pic-card" onclick="openLightbox(this)">
+                <img src="pictures/bao3.jpg" alt="抱枕">
+                <div class="pic-name">粉色</div>
+            </div>
+            <div class="pic-card" onclick="openLightbox(this)">
+                <img src="pictures/bao4.jpg" alt="抱枕">
+                <div class="pic-name">蓝色</div>
+            </div>
+        </div>
+
+        <h2 class="section-title">四件套</h2>
+        <div class="gallery">
+            <div class="pic-card" onclick="openLightbox(this)">
+                <img src="pictures/set1.jpg" alt="四件套">
+            </div>
+            <div class="pic-card" onclick="openLightbox(this)">
+                <img src="pictures/set2.jpg" alt="四件套">
+            </div>
+            <div class="pic-card" onclick="openLightbox(this)">
+                <img src="pictures/set3.jpg" alt="四件套">
+            </div>
+            <div class="pic-card" onclick="openLightbox(this)">
+                <img src="pictures/set4.jpg" alt="四件套">
+            </div>
+            <div class="pic-card" onclick="openLightbox(this)">
+                <img src="pictures/set5.jpg" alt="四件套">
+            </div>
+            <div class="pic-card" onclick="openLightbox(this)">
+                <img src="pictures/set6.jpg" alt="四件套">
+            </div>
+            <div class="pic-card" onclick="openLightbox(this)">
+                <img src="pictures/set7.jpg" alt="四件套">
+            </div>
+            <div class="pic-card" onclick="openLightbox(this)">
+                <img src="pictures/set8.jpg" alt="四件套">
+            </div>
+        </div>
+
+        <h2 class="section-title">其他文创</h2>
+        <div class="gallery">
+            <div class="pic-card" onclick="openLightbox(this)">
+                <img src="pictures/lm1.jpg" alt="其他">
+            </div>
+            <div class="pic-card" onclick="openLightbox(this)">
+                <img src="pictures/lm2.jpg" alt="其他">
+            </div>
+            <div class="pic-card" onclick="openLightbox(this)">
+                <img src="pictures/lm3.jpg" alt="其他">
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        金陵织鸭·样式库
+    </div>
+
+    <!-- 灯箱 -->
+    <div class="lightbox" id="lightbox">
+        <span class="close-btn" onclick="closeLightbox()">×</span>
+        <img src="" id="lightboxImg" class="lightbox-img">
+    </div>
+
+    <script>
+        // 一级分类切换
+        function showMain(type) {
+            document.getElementById('ipSection').classList.remove('show');
+            document.getElementById('goodsSection').classList.remove('show');
+
+            document.getElementById('btnIp').classList.remove('active');
+            document.getElementById('btnGoods').classList.remove('active');
+
+            if (type === 'ip') {
+                document.getElementById('ipSection').classList.add('show');
+                document.getElementById('btnIp').classList.add('active');
+            } else {
+                document.getElementById('goodsSection').classList.add('show');
+                document.getElementById('btnGoods').classList.add('active');
+            }
+        }
+
+        // 灯箱
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        
+        function openLightbox(el) {
+            lightboxImg.src = el.querySelector('img').src;
+            lightbox.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeLightbox() {
+            lightbox.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        lightbox.onclick = function(e) {
+            if(e.target === lightbox) closeLightbox();
+        }
+    </script>
+</body>
+</html>
